@@ -4,9 +4,9 @@ resource "aws_iam_role" "main" {
   assume_role_policy = data.aws_iam_policy_document.main.json
 }
 
-# This is a data source which can be used to construct a 
-# JSON representation of an IAM policy document, 
-# for use with resources which expect policy documents, 
+# This is a data source which can be used to construct a
+# JSON representation of an IAM policy document,
+# for use with resources which expect policy documents,
 # such as the aws_iam_policy resource.
 
 data "aws_iam_policy_document" "main" {
@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "main" {
       type        = "Service"
       identifiers = ["codepipeline.amazonaws.com"]
     }
-  } 
+  }
 }
 
 # Policies for different environments
@@ -26,15 +26,15 @@ data "aws_iam_policy_document" "main" {
 resource "aws_iam_policy" "main" {
   name = "${var.name}-policy-${var.environment}"
   description = "Allow AWS Codepipeline deployments for container application"
-  policy = data.aws_iam_policy_document.codepipeline_mutlicontainer_app.json
+  policy = data.aws_iam_policy_document.codepipeline_multicontainer_app.json
 }
 
-resource "aws_iam_role_policy_attachment" "mutlicontainer_app" {
+resource "aws_iam_role_policy_attachment" "multicontainer_app" {
   role = aws_iam_role.main.name
   policy_arn = aws_iam_policy.main.arn
 }
 
-data "aws_iam_policy_document" "codepipeline_mutlicontainer_app" {
+data "aws_iam_policy_document" "codepipeline_multicontainer_app" {
     statement {
         effect = "Allow"
 
@@ -82,7 +82,7 @@ data "aws_iam_policy_document" "codepipeline_mutlicontainer_app" {
           "cloudformation:GetTemplate",
           "cloudformation:ValidateTemplate",
           "cloudformation:UpdateStack",
-          "cloudformation:CancelUpdateStack" 
+          "cloudformation:CancelUpdateStack"
         ]
 
         resources = ["*"]

@@ -3,9 +3,9 @@ resource "aws_iam_role" "main" {
   assume_role_policy = data.aws_iam_policy_document.main.json
 }
 
-# This is a data source which can be used to construct a 
-# JSON representation of an IAM policy document, 
-# for use with resources which expect policy documents, 
+# This is a data source which can be used to construct a
+# JSON representation of an IAM policy document,
+# for use with resources which expect policy documents,
 # such as the aws_iam_policy resource.
 
 data "aws_iam_policy_document" "main" {
@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "main" {
       type        = "Service"
       identifiers = ["codebuild.amazonaws.com"]
     }
-  } 
+  }
 }
 
 # Policies for select environment
@@ -28,7 +28,7 @@ resource "aws_iam_policy" "main" {
     policy = data.aws_iam_policy_document.codebuild_container_app.json
 }
 
-resource "aws_iam_role_policy_attachment" "mutlicontainer_app" {
+resource "aws_iam_role_policy_attachment" "multicontainer_app" {
   role = aws_iam_role.main.name
   policy_arn = aws_iam_policy.main.arn
 }
@@ -94,4 +94,4 @@ data "aws_iam_policy_document" "codebuild_container_app" {
       "arn:aws:secretsmanager:eu-west-1:*"
     ]
   }
-} 
+}

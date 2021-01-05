@@ -42,7 +42,7 @@ module "codepipeline_for_container_app" {
   source = "./codepipeline"
   name = "codepipeline-container-docker-app"
   bucket_name = "codepipeline-container-docker-app-artifact"
-  github_org = "LukeMwila"
+  github_org = "bmutziu"
   repository_name = "aws-container-image-scan-with-snyk"
   branch_name = var.branch_name
   environment     = var.environment
